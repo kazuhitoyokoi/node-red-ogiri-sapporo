@@ -1,0 +1,286 @@
+[
+    {
+        "id": "6cae7b60e2a7028f",
+        "type": "tab",
+        "label": "ラズパイの制御フロー",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "6d592aef78df8585",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mqtt://public:public@public.cloud.shiftr.io",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "86c10356d896e53a",
+        "type": "exec",
+        "z": "6cae7b60e2a7028f",
+        "command": "sudo uhubctl -l 1-1 -a ",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 540,
+        "y": 160,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "7efab0e9aa03f2af",
+        "type": "inject",
+        "z": "6cae7b60e2a7028f",
+        "name": "1秒毎に実行",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 60,
+        "wires": [
+            [
+                "891e5060c2ef2aeb"
+            ]
+        ]
+    },
+    {
+        "id": "2a068e347747a90f",
+        "type": "change",
+        "z": "6cae7b60e2a7028f",
+        "name": "電源OFF",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 180,
+        "wires": [
+            [
+                "86c10356d896e53a"
+            ]
+        ]
+    },
+    {
+        "id": "6b881f5cecd1ae3c",
+        "type": "change",
+        "z": "6cae7b60e2a7028f",
+        "name": "電源ON",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 140,
+        "wires": [
+            [
+                "86c10356d896e53a"
+            ]
+        ]
+    },
+    {
+        "id": "f5c8b080fe2ae5cc",
+        "type": "switch",
+        "z": "6cae7b60e2a7028f",
+        "name": "明るさ判定",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "lt",
+                "v": "300",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 170,
+        "y": 160,
+        "wires": [
+            [
+                "6b881f5cecd1ae3c"
+            ],
+            [
+                "2a068e347747a90f"
+            ]
+        ]
+    },
+    {
+        "id": "891e5060c2ef2aeb",
+        "type": "grove-light-sensor-v1_2",
+        "z": "6cae7b60e2a7028f",
+        "name": "照度センサの値を取得",
+        "port_number": "2",
+        "x": 340,
+        "y": 60,
+        "wires": [
+            [
+                "f5c8b080fe2ae5cc",
+                "d5c50ff9f9dba2ea"
+            ]
+        ]
+    },
+    {
+        "id": "3c89852a146ba8d7",
+        "type": "inject",
+        "z": "6cae7b60e2a7028f",
+        "name": "1秒毎に実行",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 260,
+        "wires": [
+            [
+                "5c22d69d3ae32eb4"
+            ]
+        ]
+    },
+    {
+        "id": "5c22d69d3ae32eb4",
+        "type": "grove-temperature-humidity-sensor-sht3x",
+        "z": "6cae7b60e2a7028f",
+        "name": "温湿度センサの値を取得",
+        "model": "0x44",
+        "x": 350,
+        "y": 320,
+        "wires": [
+            [
+                "784d6ba44f969e5b",
+                "f549277908443c4d"
+            ]
+        ]
+    },
+    {
+        "id": "784d6ba44f969e5b",
+        "type": "mqtt out",
+        "z": "6cae7b60e2a7028f",
+        "name": "shiftr.ioへ転送",
+        "topic": "node-red",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "6d592aef78df8585",
+        "x": 580,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "d5c50ff9f9dba2ea",
+        "type": "debug",
+        "z": "6cae7b60e2a7028f",
+        "name": "照度を表示",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "f549277908443c4d",
+        "type": "debug",
+        "z": "6cae7b60e2a7028f",
+        "name": "温湿度を表示",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 260,
+        "wires": []
+    }
+]

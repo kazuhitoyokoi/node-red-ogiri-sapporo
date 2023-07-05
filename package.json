@@ -1,0 +1,8 @@
+{
+    "dependencies": {
+        "node-red": "*"
+    },
+    "scripts": {
+        "start": "node-red -D editorTheme.tours=false"
+    }
+}
