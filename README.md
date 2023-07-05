@@ -117,7 +117,7 @@ Rel(nodered1, light, "USB端子の電源ON/OFFを制御<br><br><br>")
 
   - ターミナルから操作した時の様子
 
-    https://github.com/kazuhitoyokoi/node-red-ogiri-sapporo/assets/20310935/fd6a7946-125e-4bcc-8b77-1bb153340eb8
+    https://github.com/kazuhitoyokoi/node-red-ogiri-sapporo/assets/20310935/2611d95c-bc5d-4933-80cb-3726c9236332
 
 - 照度に応じてUSB電源ON/OFFを操作するフロー
   - 照度センサの値が小さい時に1のメッセージ、大きい時に0のメッセージを生成するようにした。
@@ -128,11 +128,11 @@ Rel(nodered1, light, "USB端子の電源ON/OFFを制御<br><br><br>")
 
   部屋の照明が消えている時はUSBライトがONになる。照明をつけると、すぐUSBライトがOFF。再度照明を消すとUSBライトがONになる。
 
-  https://github.com/kazuhitoyokoi/node-red-ogiri-sapporo/assets/20310935/4e00e468-5798-4a82-a5b4-cabca510c9dc
+  https://github.com/kazuhitoyokoi/node-red-ogiri-sapporo/assets/20310935/5cd2185a-ef3c-4e77-9025-129a70b98606
 
   もちろん、実運用時は日が沈むとUSBライトが点灯し、日が昇ると消灯します🌅
 
 # 成長の様子
 <img src="day2.jpg" width="400px"><img src="day3.jpg" width="400px"><img src="day4.jpg" width="400px"><img src="day5.jpg" width="400px">
 
-~~(育つか自信がなかったので結局24時間LEDをつけて)~~すくすく育ち、無事収穫できました🌱🍽️
+すくすく育ち、無事収穫できました🌱🍽️
