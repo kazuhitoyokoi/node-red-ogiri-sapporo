@@ -481,6 +481,40 @@
         "icon": "font-awesome/fa-hand-o-up"
     },
     {
+        "id": "e77e9a274f6ca66e",
+        "type": "group",
+        "z": "735a01706b2dc2e8",
+        "name": "デモ用ランダムデータ",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "f131fdc3a1a399e7",
+            "13bb5e72035998de"
+        ],
+        "x": 254,
+        "y": 219,
+        "w": 212,
+        "h": 142
+    },
+    {
+        "id": "83950f92711569f7",
+        "type": "group",
+        "z": "735a01706b2dc2e8",
+        "name": "デモ用に無効化",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "e7dc24ac1c207562",
+            "c2f71f44f4511df7"
+        ],
+        "x": 34,
+        "y": 19,
+        "w": 292,
+        "h": 142
+    },
+    {
         "id": "caaba1e23b7b4c41",
         "type": "websocket-listener",
         "path": "/ws4uikit",
@@ -1868,61 +1902,6 @@
         ]
     },
     {
-        "id": "e7dc24ac1c207562",
-        "type": "inject",
-        "z": "735a01706b2dc2e8",
-        "name": "1秒毎に実行",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "1",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 150,
-        "y": 60,
-        "wires": [
-            [
-                "c2f71f44f4511df7"
-            ]
-        ]
-    },
-    {
-        "id": "c2f71f44f4511df7",
-        "type": "http request",
-        "z": "735a01706b2dc2e8",
-        "name": "shiftr.ioからデータ取得",
-        "method": "GET",
-        "ret": "obj",
-        "paytoqs": "ignore",
-        "url": "https://public:public@public.cloud.shiftr.io/broker/node-red",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 200,
-        "y": 120,
-        "wires": [
-            [
-                "a39f41e9bf3efe0d",
-                "abf6bcceb4013272",
-                "912823e60a322dfc"
-            ]
-        ]
-    },
-    {
         "id": "e231797a03125ed3",
         "type": "subflow:4102712984e468f8",
         "z": "735a01706b2dc2e8",
@@ -2036,6 +2015,125 @@
         "wires": [
             [
                 "b681a6ad383b61de"
+            ]
+        ]
+    },
+    {
+        "id": "f131fdc3a1a399e7",
+        "type": "inject",
+        "z": "735a01706b2dc2e8",
+        "g": "e77e9a274f6ca66e",
+        "name": "1秒毎に実行",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "$random()+24",
+        "payloadType": "jsonata",
+        "x": 370,
+        "y": 260,
+        "wires": [
+            [
+                "e231797a03125ed3"
+            ]
+        ]
+    },
+    {
+        "id": "13bb5e72035998de",
+        "type": "inject",
+        "z": "735a01706b2dc2e8",
+        "g": "e77e9a274f6ca66e",
+        "name": "1秒毎に実行",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "$random()+24",
+        "payloadType": "jsonata",
+        "x": 370,
+        "y": 320,
+        "wires": [
+            [
+                "b681a6ad383b61de"
+            ]
+        ]
+    },
+    {
+        "id": "e7dc24ac1c207562",
+        "type": "inject",
+        "z": "735a01706b2dc2e8",
+        "d": true,
+        "g": "83950f92711569f7",
+        "name": "1秒毎に実行",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 60,
+        "wires": [
+            [
+                "c2f71f44f4511df7"
+            ]
+        ]
+    },
+    {
+        "id": "c2f71f44f4511df7",
+        "type": "http request",
+        "z": "735a01706b2dc2e8",
+        "d": true,
+        "g": "83950f92711569f7",
+        "name": "shiftr.ioからデータ取得",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://public:public@public.cloud.shiftr.io/broker/node-red",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 200,
+        "y": 120,
+        "wires": [
+            [
+                "a39f41e9bf3efe0d",
+                "abf6bcceb4013272",
+                "912823e60a322dfc"
             ]
         ]
     }
